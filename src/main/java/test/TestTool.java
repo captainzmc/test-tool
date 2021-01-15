@@ -75,14 +75,18 @@ public class TestTool {
             InputStreamReader reader;
             BufferedReader br;
             List <Process> processList = new ArrayList<>();
+            int taskNum=0;
             try {
                 reader = new InputStreamReader(new FileInputStream(file));
                 br = new BufferedReader(reader);
                 String lineContent = null;
                 while((lineContent = br.readLine())!=null){
-                    System.out.println(lineContent);
-                    String [] cmdArray = lineContent.split("\\s+");
-                    processList.add(startProcess(cmdArray));
+                    if(lineContent != null) {
+                        System.out.println(lineContent);
+                        String [] cmdArray = lineContent.split("\\s+");
+                        processList.add(startProcess(cmdArray));
+                        taskNum ++;
+                    }
                 }
                 br.close();
                 reader.close();
@@ -90,6 +94,7 @@ public class TestTool {
                 for(Process process : processList) {
                     printResult(process);
                 }
+                System.out.println("#####Total task num = "+(taskNum) +"#######");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -106,17 +111,22 @@ public class TestTool {
         if(file.exists()){
             InputStreamReader reader;
             BufferedReader br;
+            int taskNum=0;
             try {
                 reader = new InputStreamReader(new FileInputStream(file));
                 br = new BufferedReader(reader);
                 String lineContent = null;
                 while((lineContent = br.readLine())!=null){
-                    System.out.println(lineContent);
-                    String [] cmdArray = lineContent.split("\\s+");
-                    printResult(startProcess(cmdArray));
+                    if(lineContent != null) {
+                        System.out.println(lineContent);
+                        String [] cmdArray = lineContent.split("\\s+");
+                        printResult(startProcess(cmdArray));
+                        taskNum ++;
+                    }
                 }
                 br.close();
                 reader.close();
+                System.out.println("#####Total task num = "+(taskNum) +"#######");
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
